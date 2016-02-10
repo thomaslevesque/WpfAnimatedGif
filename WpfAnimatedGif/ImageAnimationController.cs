@@ -15,14 +15,14 @@ namespace WpfAnimatedGif
 
         static ImageAnimationController()
         {
-            _sourceDescriptor = DependencyPropertyDescriptor.FromProperty(Image.SourceProperty, typeof (Image));
+            _sourceDescriptor = DependencyPropertyDescriptor.FromProperty(Image.SourceProperty, typeof(Image));
         }
 
         private readonly Image _image;
         private readonly ObjectAnimationUsingKeyFrames _animation;
         private readonly AnimationClock _clock;
         private readonly ClockController _clockController;
-        
+
         internal ImageAnimationController(Image image, ObjectAnimationUsingKeyFrames animation, bool autoStart)
         {
             _image = image;
@@ -34,9 +34,9 @@ namespace WpfAnimatedGif
 
             // ReSharper disable once PossibleNullReferenceException
             _clockController.Pause();
-            
+
             _image.ApplyAnimationClock(Image.SourceProperty, _clock);
-            
+
             if (autoStart)
                 _clockController.Resume();
         }
@@ -110,6 +110,15 @@ namespace WpfAnimatedGif
         public void Pause()
         {
             _clockController.Pause();
+        }
+
+        /// <summary>
+        /// Stops and resets the animation.
+        /// </summary>
+        public void Stop()
+        {
+            _clockController.Begin();
+            Pause();
         }
 
         /// <summary>
