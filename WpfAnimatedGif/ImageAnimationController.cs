@@ -15,7 +15,7 @@ namespace WpfAnimatedGif
 
         static ImageAnimationController()
         {
-            _sourceDescriptor = DependencyPropertyDescriptor.FromProperty(Image.SourceProperty, typeof (Image));
+            _sourceDescriptor = DependencyPropertyDescriptor.FromProperty(Image.SourceProperty, typeof(Image));
         }
 
         private readonly Image _image;
@@ -123,6 +123,15 @@ namespace WpfAnimatedGif
         public void Pause()
         {
             _clockController.Pause();
+        }
+
+        /// <summary>
+        /// Stops and resets the animation.
+        /// </summary>
+        public void Stop()
+        {
+            _clockController.Begin();
+            Pause();
         }
 
         /// <summary>
